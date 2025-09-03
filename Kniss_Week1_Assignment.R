@@ -1,4 +1,22 @@
-# Now it is time to create your own data frame using the tools we have learned this week.
+kniss_wd <- function (repo, folder=NULL) {
+  if(missing(folder))
+  {
+    setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+    },"/",repo, sep = "")))}
+  else 
+    
+  {
+    setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+    },"/",repo, "/", folder, sep = "")))}
+}
+
+
+kniss_wd(repo = "knisssj")
+
+
+#Now it is time to create your own data frame using the tools we have learned this week.
 # First, resave this script as: yourlastname_Week1_Assignment [1 point]
   # e.g. mine would be Wilson_Week1_Assignment
 
@@ -62,7 +80,7 @@ dfsk.r
 row.names(dfsk.r) <- c(row.names(dfsk.a[1:15,]),"p")
 dfsk.r
 
-write.csv(dfsk.r, file = "Kniss_Week1_Assignment.csv")
+write.csv(dfsk.r, file = "Week1/Kniss_Week1_Assignment.csv")
 
 summary(dfsk.r)
 
@@ -70,5 +88,8 @@ summary(dfsk.r)
     # Length:16          Length:16          Length:16          Length:16         
     # Class :character   Class :character   Class :character   Class :character  
     # Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+
+
+
 
 
