@@ -54,7 +54,7 @@ dfsk
 dfsk$Number <- as.numeric(as.character(dfsk$Number))
 dfsk$Category <- as.numeric(as.character(dfsk$Category))
 dfsk$Value <- as.numeric(as.character(dfsk$Value))
-p <- data.frame("c",16,6,15.22)  
+p <- data.frame("p","c",16,6,15.22)  
 p
 colnames(p) <- colnames(dfsk)
 dfsk.r <- rbind(dfsk, p)
