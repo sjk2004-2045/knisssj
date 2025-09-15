@@ -65,7 +65,7 @@ row.names(dfsk.r) <- dfsk.r$Letter
 dfsk.r
 
 
-df.mean <- aggregate(dfsk.r$Category ~dfsk.r$, FUN = "mean")
+df.mean <- aggregate(dfsk.r$Value ~dfsk.r$Repeats, FUN = "mean")
 df.mean
 
 colnames(df.mean) <- c("Factor","Mean")
