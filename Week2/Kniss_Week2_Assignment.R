@@ -73,17 +73,26 @@ df.mean
 
 barplot(df.mean$Mean, names.arg = df.mean$Factor)
 
-df.sd <- aggregate(dfsk.r$Category ~dfsk.r$Repeats, FUN = "sd")
-
+df.sd <- aggregate(dfsk.r$Value ~dfsk.r$Repeats, FUN = "sd")
 
 
 colnames(df.sd) <- c("Factor","StanDev")
 df.sd
 
-b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor)
+b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20), xlab = "Repeats", ylab = "Value", main = "Barplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=17, col = "grey80", cex = 0.9)
+
+arrows(b.plot, df.mean$Mean-df.sd$StanDev, b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
 
 
-arrows(b.plot, df.mean$Mean-df.sd$StanDev,
-       b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
+pdf(file = "Kniss_barplot.pdf", width = 4, height = 7)
+par(family = "serif")
+b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20), xlab = "Repeats", ylab = "Value", main = "Barplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=17, col = "grey80", cex = 0.9)
+arrows(b.plot, df.mean$Mean-df.sd$StanDev, b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
+dev.off()
+
+
+
+
+
 
 
