@@ -2,13 +2,13 @@ kniss_wd <- function (repo, folder=NULL) {
   if(missing(folder))
   {
     setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
-      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub/")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
     },"/",repo, sep = "")))}
   else 
     
   {
     setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
-      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub/")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
     },"/",repo, "/", folder, sep = "")))}
 }
 
@@ -79,19 +79,17 @@ df.sd <- aggregate(dfsk.r$Value ~dfsk.r$Repeats, FUN = "sd")
 colnames(df.sd) <- c("Factor","StanDev")
 df.sd
 
-b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20), xlab = "Repeats", ylab = "Value", main = "Barplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=17, col = "grey80", cex = 0.9)
+b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20), xlab = "Repeats", ylab = "Value", main = "Barplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, col = "grey80")
 
 arrows(b.plot, df.mean$Mean-df.sd$StanDev, b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
-
 
 pdf(file = "Kniss_barplot.pdf", width = 4, height = 7)
 par(family = "serif")
-b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20), xlab = "Repeats", ylab = "Value", main = "Barplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=17, col = "grey80", cex = 0.9)
+b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,20), xlab = "Repeats", ylab = "Value", main = "Barplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=17, col = "grey80",)
 arrows(b.plot, df.mean$Mean-df.sd$StanDev, b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
 dev.off()
 
-
-
+plot(dfsk.r$Number ~ dfsk.r$Value, ylim = c(0,20), xlab = "Value", ylab = "Number", main = "Scatterplot of Awesomeness", cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=18, col = "red3", cex = 1.5)
 
 
 
