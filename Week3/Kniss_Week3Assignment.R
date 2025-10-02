@@ -1,5 +1,26 @@
-# (1) Approximately how many hours ahead of Sunbury was the peak flow in Lewisburg during the 2011 flood? (2 pt)
+kniss_wd <- function (repo, folder=NULL) {
+  if(missing(folder))
+  {
+    setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+    },"/",repo, sep = "")))}
+  else 
+    
+  {
+    setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+    },"/",repo, "/", folder, sep = "")))}
+}
 
+
+kniss_wd(repo = "knisssj", folder = "Week3")
+
+
+
+# (1) Approximately how many hours ahead of Sunbury was the peak flow in Lewisburg during the 2011 flood? (2 pt)
+          # 17:00 9/8/11 in Lewisburg
+          # 00:45 9/9/11 in Sunbury
+    # ----> 
 
 
 # (2) Give one reason why information on the time between peak flow events up- and downstream could be valuable information? (4 pts)
