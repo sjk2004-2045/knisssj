@@ -45,6 +45,10 @@ install.packages("learnPopGen")
 library(learnPopGen)
 genetic.drift(p0 = 0.1, Ne = 120, nrep = 4, time = 100, show = "p", pause = 0.01)
 
+pdf(file = "Kniss_packageplot1.pdf", width = 6, height = 6)
+genetic.drift(p0 = 0.1, Ne = 120, nrep = 4, time = 100, show = "p", pause = 0.01)
+dev.off()
+
 
 ## (4) Using Google and ONLY packages from GitHub or CRAN:
 # Find a package that will generate standard diversity metrics for community ecology, specifically Simpson's Diversity Index.
