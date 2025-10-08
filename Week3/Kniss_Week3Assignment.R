@@ -20,10 +20,10 @@ kniss_wd(repo = "knisssj", folder = "Week3")
 # (1) Approximately how many hours ahead of Sunbury was the peak flow in Lewisburg during the 2011 flood? (2 pt)
           # 17:00 9/8/11 in Lewisburg
           # 00:45 9/9/11 in Sunbury
-    # ----> 
-
+    # ----> 7 hours and 45 mins ahead
 
 # (2) Give one reason why information on the time between peak flow events up- and downstream could be valuable information? (4 pts)
+          # This could be valuable information because it can be used to calculate the maximum discharge of the river during the storm.
 
 
 # Package scavenger hunt! (12 pts each)
@@ -39,6 +39,11 @@ kniss_wd(repo = "knisssj", folder = "Week3")
 # By manipulating these parameters you can see how it impacts the results.
 # This type of manipulation is one example of how theoretical ecology and modelling are used to predict patterns in nature.
 
+            # Citation for package: Revell L. J. (2019). learnPopGen: An R package for population genetic simulation and numerical analysis. Ecology and evolution, 9(14), 7896–7902. https://doi.org/10.1002/ece3.5412
+
+install.packages("learnPopGen")
+library(learnPopGen)
+genetic.drift(p0 = 0.1, Ne = 120, nrep = 4, time = 100, show = "p", pause = 0.01)
 
 
 ## (4) Using Google and ONLY packages from GitHub or CRAN:
