@@ -43,7 +43,7 @@ kniss_wd(repo = "knisssj", folder = "Week3")
 
 install.packages("learnPopGen")
 library(learnPopGen)
-genetic.drift(p0 = 0.1, Ne = 120, nrep = 4, time = 100, show = "p", pause = 0.01)
+genetic.drift(p0 = 0.1, Ne = 120, nrep = 4, time = 100, show = "p", pause = 0.01, main = "Frequency")
 
 pdf(file = "Kniss_packageplot1.pdf", width = 6, height = 6)
 genetic.drift(p0 = 0.1, Ne = 120, nrep = 4, time = 100, show = "p", pause = 0.01)
