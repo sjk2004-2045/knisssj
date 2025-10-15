@@ -1,4 +1,4 @@
-  kniss_wd <- function (repo, folder=NULL) {
+kniss_wd <- function (repo, folder=NULL) {
     if(missing(folder))
     {
       setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
