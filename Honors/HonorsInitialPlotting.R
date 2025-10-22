@@ -30,6 +30,9 @@ colnames(df)
 df.Qs <- df[,6:95]
 df.demog <- df[,2:5]
 
+rownames(df.Qs) <- df[,1]
+rownames(df.demog) <- df[,1]
+
 contrend <- lm(df.Qs$consensus ~ df.demog$Income)
 contrend
 
@@ -56,10 +59,39 @@ summary(BStrend)
 
 poptoplot <- subset(df, df$population<100000000)
 poptoplot
-poptrend <- lm(df.Qs$consensus ~ poptoplot$population)
+poptrend <- lm(poptoplot$consensus ~ poptoplot$population)
 poptrend
 
-plot(df.Qs$consensus ~ poptoplot$population, ylim = c(40,75), xlab = "Population (# of people)", ylab = "Percent Belief in Scientific Consensus (%)", main = "Population vs. Consensus Belief By State in 2024", cex.axis=0.9, 
+plot(poptoplot$consensus ~ poptoplot$population, ylim = c(40,75), xlab = "Population (# of people)", ylab = "Percent Belief in Scientific Consensus (%)", main = "Population vs. Consensus Belief By State in 2024", cex.axis=0.9, 
      cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1)
 abline(poptrend)
 summary(poptrend)
+
+
+
+
+library(vegan)
+ord <- rda(df.Qs)
+plot(ord)
+
+plot(ord, type="n", display = "sites")
+text(ord, display="sites", labels = as.character(rownames(df.Qs)))
+text(ord, display="species", labels = as.character(colnames(df.Qs)), col = "red", cex = 0.5)
+summary(ord)
+
+df.demog <- as.data.frame(df.demog)
+orddemo <- rda(df.Qs ~ Income, data = df.demog)
+plot(orddemo)
+summary(orddemo)
+anova(orddemo)
+
+colnames(df.demog)
+orddemo2 <- rda(df.Qs[-1,] ~ Income*Attained.BS.or.higher+Avg.Literacy.Score+population, data = df.demog[-1,])
+plot(orddemo2)
+summary(orddemo2)
+anova(orddemo2)
+
+plot(orddemo2, add = TRUE, col = "blue")
+plot(orddemo2, display = c("sp","bp"))
+
+
