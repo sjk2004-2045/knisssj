@@ -95,3 +95,86 @@ plot(orddemo2, add = TRUE, col = "blue")
 plot(orddemo2, display = c("sp","bp"))
 
 
+
+
+# Positive questions data plotting
+read.csv("Honors/POS_question_dataset_copy.csv")
+
+Pdf <- read.csv("Honors/POS_question_dataset_copy.csv", header = TRUE)
+Pdf
+
+colnames(Pdf)
+
+Pdf.Qs <- Pdf[,6:50]
+Pdf.demog <- Pdf[,2:5]
+
+rownames(Pdf.Qs) <- Pdf[,1]
+rownames(Pdf.demog) <- Pdf[,1]
+
+
+library(vegan)
+Pord <- rda(Pdf.Qs)
+plot(Pord)
+
+plot(Pord, type="n", display = "sites")
+text(Pord, display="sites", labels = as.character(rownames(Pdf.Qs)))
+text(Pord, display="species", labels = as.character(colnames(Pdf.Qs)), col = "red", cex = 0.5)
+summary(Pord)
+
+Pdf.demog <- as.data.frame(Pdf.demog)
+Porddemo <- rda(Pdf.Qs ~ Income, data = Pdf.demog)
+plot(Porddemo)
+summary(Porddemo)
+anova(Porddemo)
+
+colnames(Pdf.demog)
+Porddemo2 <- rda(Pdf.Qs[-1,] ~ Income*Attained.BS.or.higher+Avg.Literacy.Score+population, data = Pdf.demog[-1,])
+plot(Porddemo2)
+summary(Porddemo2)
+anova(Porddemo2)
+
+plot(Porddemo2, add = TRUE, col = "blue")
+plot(Porddemo2, display = c("sp","bp"))
+
+
+
+
+# Oppose questions data plotting
+read.csv("Honors/R_data_OPP_copy.csv")
+
+Odf <- read.csv("Honors/R_data_OPP_copy.csv", header = TRUE)
+Odf
+
+colnames(Odf)
+
+Odf.Qs <- Odf[,6:50]
+Odf.demog <- Odf[,2:5]
+
+rownames(Odf.Qs) <- Pdf[,1]
+rownames(Odf.demog) <- Pdf[,1]
+
+
+library(vegan)
+Oord <- rda(Odf.Qs)
+plot(Oord)
+
+plot(Oord, type="n", display = "sites")
+text(Oord, display="sites", labels = as.character(rownames(Odf.Qs)))
+text(Oord, display="species", labels = as.character(colnames(Odf.Qs)), col = "red", cex = 0.5)
+summary(Oord)
+
+Odf.demog <- as.data.frame(Odf.demog)
+Oorddemo <- rda(Odf.Qs ~ Income, data = Odf.demog)
+plot(Oorddemo)
+summary(Oorddemo)
+anova(Oorddemo)
+
+colnames(Odf.demog)
+Oorddemo2 <- rda(Odf.Qs[-1,] ~ Income*Attained.BS.or.higher+Avg.Literacy.Score+population, data = Odf.demog[-1,])
+plot(Oorddemo2)
+summary(Oorddemo2)
+anova(Oorddemo2)
+
+plot(Oorddemo2, add = TRUE, col = "blue")
+plot(Oorddemo2, display = c("sp","bp"))
+
