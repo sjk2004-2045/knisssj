@@ -21,8 +21,10 @@ kniss_wd(repo = "knisssj")
 #Initial Honors data run
 
 read.csv("Honors/YCOM8_publicdata.csv")
+#read.csv("C:/GitHub/knisssj/Honors/YCOM8_publicdata.csv")
 
-df <- read.csv("Honors/YCOM8_publicdata.csv", header = TRUE)
+
+df <- read.csv("C:/GitHub/knisssj/Honors/YCOM8_publicdata.csv", header = TRUE)
 df
 
 colnames(df)
@@ -102,6 +104,7 @@ read.csv("Honors/POS_question_dataset_copy.csv")
 
 Pdf <- read.csv("Honors/POS_question_dataset_copy.csv", header = TRUE)
 Pdf
+#Pdf <- read.csv("C:/GitHub/knisssj/Honors/POS_question_dataset_copy.csv", header = TRUE)
 
 colnames(Pdf)
 
@@ -136,7 +139,19 @@ anova(Porddemo2)
 plot(Porddemo2, add = TRUE, col = "blue")
 plot(Porddemo2, display = c("sp","bp"))
 
+Pdf.Qs[-1,]
 
+
+#Plot axis and question scores:
+State_scores <- as.data.frame(Porddemo2$CCA$u)
+plot(State_scores$RDA1~Pdf.Qs$consensus[-1])
+plot(State_scores$RDA2~Pdf.Qs$consensus[-1])
+
+plot(State_scores$RDA1~Pdf.Qs$drilloffshore[-1])
+
+plot(State_scores$RDA1~Pdf.Qs$generaterenewable[-1])
+
+plot(State_scores$RDA2~Pdf.demog$population[-1])
 
 
 # Oppose questions data plotting
@@ -144,6 +159,8 @@ read.csv("Honors/R_data_OPP_copy.csv")
 
 Odf <- read.csv("Honors/R_data_OPP_copy.csv", header = TRUE)
 Odf
+#Odf <- read.csv("C:/GitHub/knisssj/Honors/R_data_OPP_copy.csv", header = TRUE)
+
 
 colnames(Odf)
 
