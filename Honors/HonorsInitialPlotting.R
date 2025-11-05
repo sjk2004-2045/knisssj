@@ -18,13 +18,13 @@ kniss_wd(repo = "knisssj")
 
 
 
-#Initial Honors data run
+#Initial Honors data run ####
 
 read.csv("Honors/YCOM8_publicdata.csv")
 #read.csv("C:/GitHub/knisssj/Honors/YCOM8_publicdata.csv")
 
 
-df <- read.csv("C:/GitHub/knisssj/Honors/YCOM8_publicdata.csv", header = TRUE)
+df <- read.csv("Honors/YCOM8_publicdata.csv", header = TRUE)
 df
 
 colnames(df)
@@ -97,9 +97,13 @@ plot(orddemo2, add = TRUE, col = "blue")
 plot(orddemo2, display = c("sp","bp"))
 
 
+distance = dist(df.Qs[-1,])
+mydata.hclust = hclust(distance)
+plot(mydata.hclust)
 
 
-# Positive questions data plotting
+
+# Positive questions data plotting ####
 read.csv("Honors/POS_question_dataset_copy.csv")
 
 Pdf <- read.csv("Honors/POS_question_dataset_copy.csv", header = TRUE)
@@ -142,6 +146,12 @@ plot(Porddemo2, display = c("sp","bp"))
 Pdf.Qs[-1,]
 
 
+Pdistance = dist(Pdf.Qs[-1,])
+Pmydata.hclust = hclust(Pdistance)
+plot(Pmydata.hclust)
+
+
+
 #Plot axis and question scores:
 State_scores <- as.data.frame(Porddemo2$CCA$u)
 plot(State_scores$RDA1~Pdf.Qs$consensus[-1])
@@ -154,7 +164,8 @@ plot(State_scores$RDA1~Pdf.Qs$generaterenewable[-1])
 plot(State_scores$RDA2~Pdf.demog$population[-1])
 
 
-# Oppose questions data plotting
+
+# Oppose questions data plotting ####
 read.csv("Honors/R_data_OPP_copy.csv")
 
 Odf <- read.csv("Honors/R_data_OPP_copy.csv", header = TRUE)
@@ -167,8 +178,8 @@ colnames(Odf)
 Odf.Qs <- Odf[,6:50]
 Odf.demog <- Odf[,2:5]
 
-rownames(Odf.Qs) <- Pdf[,1]
-rownames(Odf.demog) <- Pdf[,1]
+rownames(Odf.Qs) <- Odf[,1]
+rownames(Odf.demog) <- Odf[,1]
 
 
 library(vegan)
@@ -194,4 +205,77 @@ anova(Oorddemo2)
 
 plot(Oorddemo2, add = TRUE, col = "blue")
 plot(Oorddemo2, display = c("sp","bp"))
+
+
+
+
+
+distance = dist(Odf.Qs[-1,])
+mydata.hclust = hclust(distance)
+plot(mydata.hclust)
+
+
+z <- Odf.demog[-1,c(1,3)]
+means <- apply(z,2,mean)
+sds <- apply(z,2,sd)
+nor <- scale(z,center=means,scale=sds)
+
+Odistance = dist(nor)
+Omydata.hclust = hclust(Odistance)
+plot(Omydata.hclust)
+
+
+#plot(mydata.hclust,labels=mydata$Company,main='Default from hclust')
+#plot(mydata.hclust,hang=-1, labels=mydata$Company,main='Default from hclust')
+
+
+
+
+
+
+# Positive questions again but now less and also voting data yippee ####
+read.csv("R_Data_POS_isolatedQ/Sheet_2-Table_1.csv")
+
+PIdf <- read.csv("R_Data_POS_isolatedQ/Sheet_2-Table_1.csv", header = TRUE)
+PIdf
+#PIdf <- read.csv("C:/GitHub/knisssj/R_Data_POS_isolatedQ/Sheet_2-Table_1.csv", header = TRUE)
+
+
+colnames(PIdf)
+
+PIdf.Qs <- PIdf[,15:29]
+PIdf.demog <- PIdf[,2:14]
+
+rownames(PIdf.Qs) <- PIdf[,1]
+rownames(PIdf.demog) <- PIdf[,1]
+
+
+library(vegan)
+PIord <- rda(PIdf.Qs)
+plot(PIord)
+
+plot(PIord, type="n", display = "sites")
+text(PIord, display="sites", labels = as.character(rownames(PIdf.Qs)))
+text(PIord, display="species", labels = as.character(colnames(PIdf.Qs)), col = "red", cex = 0.5)
+summary(PIord)
+
+PIdf.demog <- as.data.frame(PIdf.demog)
+PIorddemo <- rda(PIdf.Qs ~ Income, data = PIdf.demog)
+plot(PIorddemo)
+summary(PIorddemo)
+anova(PIorddemo)
+
+colnames(PIdf.demog)
+PIorddemo2 <- rda(PIdf.Qs[-1,c(1,2,3,4,5,6,7,8,9,10,13,14,15)] ~ Income*Attained.BS.or.higher+Avg.Literacy.Score, data = PIdf.demog[-1,])
+plot(PIorddemo2)
+summary(PIorddemo2)
+anova(PIorddemo2)
+
+plot(PIorddemo2, add = TRUE, col = "blue")
+plot(PIorddemo2, display = c("sp","bp"))
+
+
+
+
+
 
