@@ -43,6 +43,15 @@ plot(df.Qs$consensus ~ df.demog$Income, ylim = c(40,75), xlab = "Personal Income
 abline(contrend)
 summary(contrend)
 
+
+#boxplot(pre_post$WSKnowledgeRate~factor(pre_post$pre_post, levels=c("pre","post")),xlab = "", ylab="Current Watershed Science Knowledge")
+#mtext(paste("p=",round(summary(lm(pre_post$WSKnowledgeRate~pre_post$pre_post))$coefficients[,4][2], digits = 15), "   r^2 =",
+#           round(summary(lm(pre_post$WSKnowledgeRate~pre_post$pre_post))$adj.r.squared, digits = 3)), side=3)
+
+mtext("p=.05", side = 2)
+
+summary(contrend)$coefficients[,4][2]
+
 littrend <- lm(df.Qs$consensus ~ df.demog$Avg.Literacy.Score)
 littrend
 
