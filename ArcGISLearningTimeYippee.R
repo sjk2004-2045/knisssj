@@ -34,7 +34,7 @@ library(riverdist)
 # USGS tutorial ####
 install.packages("ggplot2")
 library(ggplot2)
-
+library(dataRetrieval)
 sites_information <- read_waterdata_monitoring_location(monitoring_location_id = "USGS-01491000")
 site_info <- read_waterdata_monitoring_location(monitoring_location_id = "USGS-01491000",properties = c("monitoring_location_id","site_type","drainage_area","monitoring_location_name"))
 
@@ -53,7 +53,7 @@ leaflet(data = sites_wi |>
           sf::st_transform(crs = leaflet_crs)) |> 
   addProviderTiles("CartoDB.Positron") |> 
   addCircleMarkers(popup = ~monitoring_location_name, radius = 0.1, opacity = 1)
-
+library(dataRetrieval)
 ts_available <- read_waterdata_ts_meta(monitoring_location_id = "USGS-01491000", parameter_code = c("00060", "00010"))
 
 pcode_info <- read_waterdata_parameter_codes(parameter_code =  "00660")

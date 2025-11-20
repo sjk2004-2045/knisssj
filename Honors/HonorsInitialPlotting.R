@@ -2,13 +2,15 @@ kniss_wd <- function (repo, folder=NULL) {
   if(missing(folder))
   {
     setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
-      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} 
+      else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
     },"/",repo, sep = "")))}
   else 
     
   {
     setwd(print(paste(if (Sys.info()[["sysname"]]=="Windows") {("C:/GitHub")} else {
-      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
+      if (Sys.info()[["sysname"]]=="Darwin"){("/Users/sylviakniss/Documents/GitHub")} 
+      else ("for Linux run: setwd('/home/[INSERT YOUR USERNAME]/GitHub')")
     },"/",repo, "/", folder, sep = "")))}
 }
 
@@ -38,13 +40,19 @@ rownames(df.demog) <- df[,1]
 contrend <- lm(df.Qs$consensus ~ df.demog$Income)
 contrend
 
-plot(df.Qs$consensus ~ df.demog$Income, ylim = c(40,75), xlab = "Personal Income in 2023 ($)", ylab = "Percent Belief in Scientific Consensus in 2024 (%)", main = "Personal Income vs. Consensus Belief By State", cex.axis=0.9, 
-     cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1)
+plot(df.Qs$consensus ~ df.demog$Income, ylim = c(40,75), xlab = "Personal Income in 2023 ($)", 
+     ylab = "Percent Belief in Scientific Consensus in 2024 (%)",
+     main = "Personal Income vs. Consensus Belief By State", cex.axis=0.9,
+     cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1, xaxt="n")
 abline(contrend)
+axis(1, at = seq(40000, 110000, by = 10000), las=1)
 summary(contrend)
 
 
-#boxplot(pre_post$WSKnowledgeRate~factor(pre_post$pre_post, levels=c("pre","post")),xlab = "", ylab="Current Watershed Science Knowledge")
+
+#https://stackoverflow.com/questions/11775692/how-to-specify-the-actual-x-axis-values-to-plot-as-x-axis-ticks-in-r
+
+#boxplot(df.Qs$consensus~factor(df.demog$Income, levels=c("pre","post")),xlab = "", ylab="Current Watershed Science Knowledge")
 #mtext(paste("p=",round(summary(lm(pre_post$WSKnowledgeRate~pre_post$pre_post))$coefficients[,4][2], digits = 15), "   r^2 =",
 #           round(summary(lm(pre_post$WSKnowledgeRate~pre_post$pre_post))$adj.r.squared, digits = 3)), side=3)
 
@@ -55,15 +63,17 @@ summary(contrend)$coefficients[,4][2]
 littrend <- lm(df.Qs$consensus ~ df.demog$Avg.Literacy.Score)
 littrend
 
-plot(df.Qs$consensus ~ df.demog$Avg.Literacy.Score, ylim = c(40,75), xlab = "Average Literacy Score", ylab = "Percent Belief in Scientific Consensus (%)", main = "Average Literacy Score vs. Consensus Belief By State in 2024", cex.axis=0.9, 
-     cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1)
+plot(df.Qs$consensus ~ df.demog$Avg.Literacy.Score, ylim = c(40,75), xlab = "Average Literacy Score", 
+     ylab = "Percent Belief in Scientific Consensus (%)", main = "Average Literacy Score vs. Consensus Belief By State in 2024", 
+     cex.axis=0.9, cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1)
 abline(littrend)
 summary(littrend)
 
 BStrend <- lm(df.Qs$consensus ~ df.demog$Attained.BS.or.higher)
 BStrend
 
-plot(df.Qs$consensus ~ df.demog$Attained.BS.or.higher, ylim = c(40,75), xlab = "Attained a BS Degree or Higher in 2023 (%)", ylab = "Percent Belief in Scientific Consensus in 2024 (%)", main = "Degree Attained vs. Consensus Belief By State", cex.axis=0.9, 
+plot(df.Qs$consensus ~ df.demog$Attained.BS.or.higher, ylim = c(40,75), xlab = "Attained a BS Degree or Higher in 2023 (%)", 
+     ylab = "Percent Belief in Scientific Consensus in 2024 (%)", main = "Degree Attained vs. Consensus Belief By State", cex.axis=0.9, 
      cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1)
 abline(BStrend)
 summary(BStrend)
@@ -73,7 +83,9 @@ poptoplot
 poptrend <- lm(poptoplot$consensus ~ poptoplot$population)
 poptrend
 
-plot(poptoplot$consensus ~ poptoplot$population, ylim = c(40,75), xlab = "Population (# of people)", ylab = "Percent Belief in Scientific Consensus (%)", main = "Population vs. Consensus Belief By State in 2024", cex.axis=0.9, 
+plot(poptoplot$consensus ~ poptoplot$population, ylim = c(40,75), xlab = "Population (# of people)", 
+     ylab = "Percent Belief in Scientific Consensus (%)", 
+     main = "Population vs. Consensus Belief By State in 2024", cex.axis=0.9, 
      cex.main = 1.5, cex.lab = 1, pch=16, col = "gray40", cex = 1)
 abline(poptrend)
 summary(poptrend)
